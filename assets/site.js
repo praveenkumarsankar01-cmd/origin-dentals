@@ -90,35 +90,37 @@
   var today = clinicNow().day;
   $$('[data-day]').forEach(function (row) { if (+row.getAttribute('data-day') === today) row.classList.add('is-today'); });
 
-  /* ---------- reveal + counters ---------- */
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add('is-in');
-        io.unobserve(en.target);
+  /* ---------- tabs (symptom finder, patient stories) ---------- */
+  $$('[data-tabs]').forEach(function (box) {
+    var tabs = $$('[role="tab"]', box);
+    if (!tabs.length) return;
+    function show(tab, focus, user) {
+      var panel;
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if (p) { p.hidden = !on; if (on) panel = p; }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    $$('.reveal').forEach(function (el) { io.observe(el); });
-
-    var co = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        co.unobserve(en.target);
-        var el = en.target, end = +el.getAttribute('data-count'), suffix = el.getAttribute('data-suffix') || '';
-        if (reduceMotion) { el.textContent = end.toLocaleString('en-IN') + suffix; return; }
-        var t0 = performance.now(), dur = 1400;
-        (function tick(now) {
-          var p = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - Math.pow(1 - p, 3)));
-          el.textContent = v.toLocaleString('en-IN') + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        })(t0);
+      if (focus) tab.focus();
+      // on narrow screens the panel sits below the list; bring it into view if it is out of sight
+      if (user && panel && window.innerWidth <= 900) {
+        var r = panel.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.7 || r.bottom < 80) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { show(t, false, true); });
+      t.addEventListener('keydown', function (e) {
+        var j = { ArrowDown: i + 1, ArrowRight: i + 1, ArrowUp: i - 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (j === undefined) return;
+        e.preventDefault();
+        show(tabs[(j + tabs.length) % tabs.length], true, false);
       });
-    }, { threshold: 0.5 });
-    $$('[data-count]').forEach(function (el) { co.observe(el); });
-  } else {
-    $$('.reveal').forEach(function (el) { el.classList.add('is-in'); });
-  }
+    });
+    show(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0], false, false);
+  });
 
   /* ---------- videos ---------- */
   var hero = $('[data-hero-video]');
@@ -165,20 +167,55 @@
   $$('[data-modal-close]').forEach(function (el) { el.addEventListener('click', function () { setModal(false); }); });
 
   if (form) {
-    // prefill from links such as index.html?service=implants#book
-    var qs = new URLSearchParams(location.search);
-    ['service', 'doctor'].forEach(function (k) {
-      var v = qs.get(k), sel = form.elements[k];
-      if (v && sel && $$('option', sel).some(function (o) { return o.value === v; })) sel.value = v;
-    });
     // earliest date = today in clinic time
-    var d = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
-    if (form.elements.date) form.elements.date.min = d;
+    var minDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    if (form.elements.date) form.elements.date.min = minDate;
+
+    // prefill from links such as index.html?service=implants#book, or from the quick booking bar
+    var prefill = function (params) {
+      ['service', 'doctor'].forEach(function (k) {
+        var v = params.get(k), sel = form.elements[k];
+        if (v && sel && $$('option', sel).some(function (o) { return o.value === v; })) sel.value = v;
+      });
+      var dt = params.get('date');
+      if (dt && /^\d{4}-\d{2}-\d{2}$/.test(dt) && dt >= minDate) form.elements.date.value = dt;
+    };
+    prefill(new URLSearchParams(location.search));
+
+    var goToForm = function (focusName) {
+      var sec = $('#book');
+      if (!sec) return;
+      sec.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#book');
+      if (focusName) setTimeout(function () { form.elements.name.focus({ preventScroll: true }); }, reduceMotion ? 0 : 700);
+    };
+
+    var quick = $('#quickBook');
+    if (quick) {
+      if (quick.elements.date) quick.elements.date.min = minDate;
+      quick.addEventListener('submit', function (e) {
+        e.preventDefault();
+        prefill(new URLSearchParams(new FormData(quick)));
+        goToForm(true);
+      });
+    }
+
+    // booking links that point at this same page: fill the form in place instead of reloading
+    var samePage = function (p) { return p.replace(/index\.html$/, ''); };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="#book"]');
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var url = new URL(a.getAttribute('href'), location.href);
+      if (samePage(url.pathname) !== samePage(location.pathname)) return;
+      e.preventDefault();
+      prefill(url.searchParams);
+      goToForm(false);
+    });
 
     var rules = {
       name: function (v) { return v.trim().length >= 2 || 'Please tell us your name.'; },
       phone: function (v) { var digits = v.replace(/[^\d]/g, ''); return (digits.length >= 10 && digits.length <= 15) || 'Please enter a phone number we can call.'; },
-      date: function (v) { return (!!v && v >= d) || 'Please pick today or a later date.'; },
+      date: function (v) { return (!!v && v >= minDate) || 'Please pick today or a later date.'; },
       slot: function () { return !!form.querySelector('input[name="slot"]:checked') || 'Please choose a time of day.'; }
     };
     function check(name) {
@@ -222,7 +259,7 @@
       $('#waSend').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
       setModal(true);
       form.reset();
-      if (form.elements.date) form.elements.date.min = d;
+      if (form.elements.date) form.elements.date.min = minDate;
     });
   }
 

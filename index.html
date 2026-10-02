@@ -97,8 +97,13 @@
 <main id="main">
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="wrap hero-grid">
-    <div>
+  <div class="hero-media">
+    <video data-hero-video autoplay muted loop playsinline preload="metadata" poster="assets/media/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/media/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
       <span class="label">Dental clinic · Kodambakkam, Chennai</span>
       <h1 id="hero-title">Specialist dental care in Kodambakkam</h1>
       <p class="lead">Four specialist dentists for implants, root canal treatment, braces and aligners, cosmetic dentistry and children's care. Every treatment is explained beforehand and priced in writing.</p>
@@ -106,273 +111,398 @@
         <a class="btn btn-primary" href="#book">Book an appointment</a>
         <a class="btn btn-outline" href="tel:+919092543740"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 90925 43740</a>
       </div>
-      <ul class="hero-facts">
-        <li><b>Opening hours</b><span class="open-badge" data-open-badge>Mon–Sat 8 AM – 9 PM</span></li>
-        <li><b>Emergencies</b>Same-day appointments</li>
-        <li><b>Fees</b>Written estimate first</li>
+      <ul class="hero-meta">
+        <li><span class="open-badge" data-open-badge>Mon–Sat 8 AM – 9 PM</span></li>
+        <li>Same-day emergency slots</li>
       </ul>
     </div>
-    <div class="hero-media">
-      <video data-hero-video autoplay muted loop playsinline preload="metadata" poster="assets/media/hero-poster.jpg" aria-hidden="true" tabindex="-1">
-        <source src="assets/media/hero.mp4" type="video/mp4">
-      </video>
-    </div>
   </div>
 </section>
 
-<section class="strip" aria-label="Clinic standards">
+<div class="wrap qb-wrap">
+  <form class="quick-book" id="quickBook" action="index.html#book" method="get" aria-label="Start a booking">
+    <div class="qb-field"><label for="qb-service">Treatment</label><select id="qb-service" name="service"><option value="not-sure">Not sure yet</option><option value="checkups">Check-ups &amp; Cleaning</option><option value="root-canal">Root Canal Treatment</option><option value="implants">Dental Implants</option><option value="aligners">Braces &amp; Clear Aligners</option><option value="whitening">Teeth Whitening</option><option value="smile-design">Smile Design &amp; Veneers</option><option value="kids">Kids Dentistry</option><option value="gum-care">Gum Care</option><option value="emergency">Emergency Dental Care</option></select></div>
+    <div class="qb-field"><label for="qb-doctor">Dentist</label><select id="qb-doctor" name="doctor"><option value="any">Any dentist</option><option value="vikram-sundaram">Dr. Vikram Sundaram</option><option value="arjun-prakash">Dr. Arjun Prakash</option><option value="meera-krishnan">Dr. Meera Krishnan</option><option value="kavya-ramesh">Dr. Kavya Ramesh</option></select></div>
+    <div class="qb-field"><label for="qb-date">Preferred date</label><input id="qb-date" name="date" type="date"></div>
+    <button class="btn btn-primary" type="submit">Continue booking <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+  </form>
+</div>
+
+<section class="intro" aria-label="About Origin Dentals in brief">
   <div class="wrap">
-    <ul class="strip-list">
-      <li><i class="fa-solid fa-check" aria-hidden="true"></i>Hospital-grade sterilisation</li>
-      <li><i class="fa-solid fa-check" aria-hidden="true"></i>In-house digital X-rays</li>
-      <li><i class="fa-solid fa-check" aria-hidden="true"></i>Written estimates</li>
-      <li><i class="fa-solid fa-check" aria-hidden="true"></i>EMI available</li>
-    </ul>
+    <p class="statement">Four specialists under one roof, and one rule since 2010. <span>Every option is explained and every price agreed in writing before treatment begins.</span></p>
+    <dl class="figures">
+      <div><dt>Caring for Kodambakkam since</dt><dd>2010</dd></div>
+      <div><dt>Specialist dentists</dt><dd>4</dd></div>
+      <div><dt>Languages spoken</dt><dd>5</dd></div>
+      <div><dt>Emergency helpline</dt><dd>24/7</dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="section" id="treatments" aria-labelledby="tr-title">
+<section class="section section--flush" id="treatments" aria-labelledby="tr-title">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label">Treatments</span>
-      <h2 id="tr-title">General, specialist and cosmetic dentistry</h2>
-      <p>All treatments are carried out in one clinic, with one patient record shared between our dentists.</p>
+    <div class="head-split">
+      <div><span class="label">Treatments</span><h2 id="tr-title">General, specialist and cosmetic dentistry</h2></div>
+      <div><p>All treatments are carried out in one clinic, with one patient record shared between our dentists.</p><a class="text-link" href="#fees">See all fees <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
     </div>
-    <div class="cards-3">
-      <a class="t-card" href="services/checkups.html">
-        <div class="t-card-img"><img src="assets/img/svc-checkups.webp" alt="Dentist examining a patient's teeth with a mirror and scaler" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
-          <h3>Check-ups &amp; Cleaning</h3>
-          <p>Six-monthly examinations, scaling and polishing.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹500</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
-        </div>
-      </a>
-      <a class="t-card" href="services/root-canal.html">
-        <div class="t-card-img"><img src="assets/img/svc-root-canal.webp" alt="Dentist reviewing dental X-ray scans on a light box" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
-          <h3>Root Canal Treatment</h3>
-          <p>Treatment for painful or infected teeth, usually completed in one or two visits.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹4,500</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
-        </div>
-      </a>
-      <a class="t-card" href="services/implants.html">
-        <div class="t-card-img"><img src="assets/img/svc-implants.webp" alt="Model showing a dental implant between two natural teeth" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
+    <div class="bento">
+      <a class="tile tile--lg" href="services/implants.html">
+        <img src="assets/img/svc-implants.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:center 55%">
+        <div class="tile-body">
           <h3>Dental Implants</h3>
           <p>Fixed, natural-looking replacements for missing teeth.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹32,000</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+          <span class="tile-price">From <b>₹32,000</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
-      <a class="t-card" href="services/aligners.html">
-        <div class="t-card-img"><img src="assets/img/svc-aligners.webp" alt="Hands holding clear dental aligners and their case" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
+      <a class="tile tile--wide" href="services/root-canal.html">
+        <img src="assets/img/svc-root-canal.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:center 30%">
+        <div class="tile-body">
+          <h3>Root Canal Treatment</h3>
+          <span class="tile-price">From <b>₹4,500</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+        </div>
+      </a>
+      <a class="tile" href="services/aligners.html">
+        <img src="assets/img/svc-aligners.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:center">
+        <div class="tile-body">
           <h3>Braces &amp; Clear Aligners</h3>
-          <p>Metal braces, ceramic braces and clear aligners for straighter teeth.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹35,000</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+          <span class="tile-price">From <b>₹35,000</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
-      <a class="t-card" href="services/whitening.html">
-        <div class="t-card-img"><img src="assets/img/svc-whitening.webp" alt="Close-up of a bright, white smile" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
+      <a class="tile" href="services/whitening.html">
+        <img src="assets/img/svc-whitening.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:72% center">
+        <div class="tile-body">
           <h3>Teeth Whitening</h3>
-          <p>In-clinic and take-home whitening, with care for sensitive teeth.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹7,500</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+          <span class="tile-price">From <b>₹7,500</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
-      <a class="t-card" href="services/smile-design.html">
-        <div class="t-card-img"><img src="assets/img/svc-smile-design.webp" alt="Dentist pointing at a 3D dental scan on a tablet" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
+      <a class="tile" href="services/checkups.html">
+        <img src="assets/img/svc-checkups.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:30% center">
+        <div class="tile-body">
+          <h3>Check-ups &amp; Cleaning</h3>
+          <span class="tile-price">From <b>₹500</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+        </div>
+      </a>
+      <a class="tile" href="services/smile-design.html">
+        <img src="assets/img/svc-smile-design.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:40% center">
+        <div class="tile-body">
           <h3>Smile Design &amp; Veneers</h3>
-          <p>Veneers, bonding and crowns, planned digitally before treatment.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹9,000</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+          <span class="tile-price">From <b>₹9,000</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
-      <a class="t-card" href="services/kids.html">
-        <div class="t-card-img"><img src="assets/img/svc-kids.jpg" alt="A young boy smiling in a dental chair, holding a teeth model" width="1200" height="675" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
-          <h3>Kids Dentistry</h3>
-          <p>Check-ups, fluoride, sealants and fillings for children.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹400</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
-        </div>
-      </a>
-      <a class="t-card" href="services/gum-care.html">
-        <div class="t-card-img"><img src="assets/img/svc-gum-care.webp" alt="Dental hygienist treating a patient in a bright clinic" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
+      <a class="tile" href="services/gum-care.html">
+        <img src="assets/img/svc-gum-care.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" style="object-position:62% 30%">
+        <div class="tile-body">
           <h3>Gum Care</h3>
-          <p>Treatment for bleeding gums, gum disease and recession.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹1,500</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+          <span class="tile-price">From <b>₹1,500</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
-      <a class="t-card" href="services/emergency.html">
-        <div class="t-card-img"><img src="assets/img/svc-emergency.webp" alt="Two dentists treating a patient in a clinic" width="1200" height="800" loading="lazy" decoding="async"></div>
-        <div class="t-card-body">
-          <h3>Emergency Dental Care</h3>
-          <p>Same-day appointments for pain, swelling and broken teeth.</p>
-          <div class="t-card-foot"><span class="price">From <b>₹700</b></span><span class="text-link">Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></div>
+      <a class="tile" href="services/kids.html">
+        <img src="assets/img/svc-kids.jpg" alt="" width="1200" height="675" loading="lazy" decoding="async" style="object-position:center 35%">
+        <div class="tile-body">
+          <h3>Kids Dentistry</h3>
+          <span class="tile-price">From <b>₹400</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </div>
       </a>
+    </div>
+    <div class="urgent">
+      <div><h3>In pain right now?</h3><p>We keep same-day emergency slots every day, and the helpline is answered 24 hours a day.</p></div>
+      <div class="actions">
+        <a class="btn btn-primary" href="tel:+919092543740"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call +91 90925 43740</a>
+        <a class="btn btn-outline" href="services/emergency.html">Emergency care</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--soft" aria-labelledby="ns-title">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="label">Symptoms</span>
-      <h2 id="ns-title">Not sure what you need?</h2>
+<section class="section section--soft" id="finder" aria-labelledby="fd-title">
+  <div class="wrap finder" data-tabs>
+    <div class="finder-side">
+      <span class="label">Not sure what you need?</span>
+      <h2 id="fd-title">Start with what you are feeling</h2>
       <p>Choose the problem closest to yours. If you are still unsure, book a consultation and we will advise you.</p>
     </div>
-    <div class="problems">
-      <a class="problem" href="services/root-canal.html"><div><b>Toothache or sensitivity</b><span>A throbbing ache, or a jolt with something cold.</span></div><em>Root Canal Treatment <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
-      <a class="problem" href="services/emergency.html"><div><b>Chipped or broken tooth</b><span>From biting something hard, or a fall.</span></div><em>Emergency Dental Care <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
-      <a class="problem" href="services/implants.html"><div><b>Missing teeth</b><span>A gap, a loose bridge or a denture that moves.</span></div><em>Dental Implants <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
-      <a class="problem" href="services/aligners.html"><div><b>Crooked or gappy teeth</b><span>Crowding, gaps, or a bite that feels off.</span></div><em>Braces &amp; Clear Aligners <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
-      <a class="problem" href="services/whitening.html"><div><b>Stained or yellow teeth</b><span>Tea, coffee, turmeric — or simply time.</span></div><em>Teeth Whitening <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
-      <a class="problem" href="services/gum-care.html"><div><b>Bleeding gums</b><span>Pink in the sink when you brush or floss.</span></div><em>Gum Care <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></em></a>
+    <div class="finder-tabs" role="tablist" aria-label="Common dental problems" aria-orientation="vertical">
+      <button type="button" role="tab" id="ft-0" aria-controls="fp-0" aria-selected="true">Toothache or sensitivity<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" role="tab" id="ft-1" aria-controls="fp-1" aria-selected="false" tabindex="-1">Chipped or broken tooth<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" role="tab" id="ft-2" aria-controls="fp-2" aria-selected="false" tabindex="-1">Missing teeth<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" role="tab" id="ft-3" aria-controls="fp-3" aria-selected="false" tabindex="-1">Crooked or gappy teeth<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" role="tab" id="ft-4" aria-controls="fp-4" aria-selected="false" tabindex="-1">Stained or yellow teeth<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" role="tab" id="ft-5" aria-controls="fp-5" aria-selected="false" tabindex="-1">Bleeding gums<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+    <div class="finder-panels">
+      <div class="finder-panel" role="tabpanel" id="fp-0" aria-labelledby="ft-0" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Root Canal Treatment</h3>
+        <p>Pain that lingers after something hot or cold, or wakes you at night, usually means the nerve inside the tooth is inflamed. A bite test and a digital X-ray show which tooth it is, and whether a filling is enough or it needs a root canal.</p>
+        <dl class="facts"><div><dt>Treatment time</dt><dd>60–90 minutes</dd></div><div><dt>Visits</dt><dd>1–2 visits</dd></div><div><dt>Fee</dt><dd>From ₹4,500</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-arjun.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Arjun Prakash</b>Endodontist · Root Canal Specialist</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=root-canal#book">Book for this</a>
+          <a class="btn btn-outline" href="services/root-canal.html">About root canal treatment</a>
+        </div>
+      </div>
+      <div class="finder-panel" role="tabpanel" id="fp-1" aria-labelledby="ft-1" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Emergency Dental Care</h3>
+        <p>A small chip can usually be repaired with tooth-coloured bonding in one visit; a larger break may need a crown. Keep any broken piece, avoid chewing on that side, and come in the same day.</p>
+        <dl class="facts"><div><dt>Availability</dt><dd>Same-day slots</dd></div><div><dt>Helpline</dt><dd>Answered 24/7</dd></div><div><dt>Fee</dt><dd>Consultation ₹700</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-arjun.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Arjun Prakash</b>Endodontist · Root Canal Specialist</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=emergency#book">Book for this</a>
+          <a class="btn btn-outline" href="services/emergency.html">About emergency dental care</a>
+        </div>
+      </div>
+      <div class="finder-panel" role="tabpanel" id="fp-2" aria-labelledby="ft-2" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Dental Implants</h3>
+        <p>A gap lets the neighbouring teeth drift and the jawbone shrink. An implant replaces the root as well as the tooth, so the new tooth is fixed in place and the bone stays healthy.</p>
+        <dl class="facts"><div><dt>Treatment time</dt><dd>About 60 minutes to place</dd></div><div><dt>Visits</dt><dd>2–3 visits over 3 months</dd></div><div><dt>Fee</dt><dd>From ₹32,000 with crown</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-vikram.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Vikram Sundaram</b>Founder &amp; Lead Implantologist</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=implants#book">Book for this</a>
+          <a class="btn btn-outline" href="services/implants.html">About dental implants</a>
+        </div>
+      </div>
+      <div class="finder-panel" role="tabpanel" id="fp-3" aria-labelledby="ft-3" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Braces &amp; Clear Aligners</h3>
+        <p>Crowding, gaps and bite problems can be corrected at any age. A digital scan shows how your teeth would move before you choose between braces and clear aligners.</p>
+        <dl class="facts"><div><dt>Treatment time</dt><dd>6–24 months</dd></div><div><dt>Visits</dt><dd>Reviews every 6–8 weeks</dd></div><div><dt>Fee</dt><dd>From ₹35,000</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-meera.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Meera Krishnan</b>Orthodontist &amp; Children's Dentist</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=aligners#book">Book for this</a>
+          <a class="btn btn-outline" href="services/aligners.html">About braces &amp; clear aligners</a>
+        </div>
+      </div>
+      <div class="finder-panel" role="tabpanel" id="fp-4" aria-labelledby="ft-4" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Teeth Whitening</h3>
+        <p>Stains from tea, coffee and turmeric respond well to professional whitening. We check your teeth first and tell you honestly how much lighter they are likely to get.</p>
+        <dl class="facts"><div><dt>Treatment time</dt><dd>About 75 minutes</dd></div><div><dt>Visits</dt><dd>1 visit</dd></div><div><dt>Fee</dt><dd>From ₹7,500</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-kavya.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Kavya Ramesh</b>Cosmetic Dentist · Smile Design</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=whitening#book">Book for this</a>
+          <a class="btn btn-outline" href="services/whitening.html">About teeth whitening</a>
+        </div>
+      </div>
+      <div class="finder-panel" role="tabpanel" id="fp-5" aria-labelledby="ft-5" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>Gum Care</h3>
+        <p>Bleeding when you brush is the earliest sign of gum disease, and the stage at which it can be fully reversed. A deep clean below the gumline usually settles it within a few weeks.</p>
+        <dl class="facts"><div><dt>Treatment time</dt><dd>45–60 minutes</dd></div><div><dt>Visits</dt><dd>1–3 visits</dd></div><div><dt>Fee</dt><dd>From ₹1,500</dd></div></dl>
+        <div class="finder-doc"><img src="assets/img/dr-vikram.webp" alt="" width="44" height="44" loading="lazy"><span><b>Dr. Vikram Sundaram</b>Founder &amp; Lead Implantologist</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=gum-care#book">Book for this</a>
+          <a class="btn btn-outline" href="services/gum-care.html">About gum care</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="ab-title">
-  <div class="wrap split">
-    <div class="photo photo--4x3"><img src="assets/img/clinic-room.webp" alt="A treatment room with a white dental chair beside the window" width="1200" height="800" loading="lazy"></div>
-    <div>
-      <span class="label">About the practice</span>
-      <h2 id="ab-title">Caring for Kodambakkam families since 2010</h2>
-      <p style="margin-top:16px">Origin Dentals opened in 2010 as a two-chair practice beside Kodambakkam bus stop. Today four specialists work from the same clinic and share one patient record, so the dentist treating you always has your full history.</p>
-      <ul class="ticks">
-        <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Consultations in Tamil, English, Hindi, Telugu and Malayalam</span></li>
-        <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Open until 9 PM on weekdays and on Sunday mornings</span></li>
-        <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>EMI options for larger treatments</span></li>
-      </ul>
+<section class="section" id="about" aria-labelledby="ab-title">
+  <div class="wrap">
+    <div class="about-photo"><img src="assets/img/clinic-suite.webp" alt="A bright treatment room at Origin Dentals with a dental chair beside the window" width="1200" height="800" loading="lazy" decoding="async"></div>
+    <div class="about-body">
+      <div class="about-card">
+        <span class="label">About the practice</span>
+        <h2 id="ab-title">Caring for Kodambakkam families since 2010</h2>
+        <p>Origin Dentals opened in 2010 as a two-chair practice beside Kodambakkam bus stop. Today four specialists work from the same clinic and share one patient record, so the dentist treating you always has your full history.</p>
+        <figure class="pull">
+          <blockquote>“A fixed tooth changes how someone eats, talks and smiles. I want every patient to know exactly what that will take before we begin.”</blockquote>
+          <figcaption><img src="assets/img/dr-vikram.webp" alt="" width="46" height="46" loading="lazy"><span><b>Dr. Vikram Sundaram</b>Founder &amp; Lead Implantologist</span></figcaption>
+        </figure>
+      </div>
+      <div class="about-side">
+        <ul class="ticks">
+          <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Consultations in Tamil, English, Hindi, Telugu and Malayalam</span></li>
+          <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>Open until 9 PM Monday to Saturday, and on Sunday mornings</span></li>
+          <li><i class="fa-solid fa-check" aria-hidden="true"></i><span>EMI options for larger treatments</span></li>
+        </ul>
+        <a class="text-link" href="doctors/vikram-sundaram.html">Meet our founder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--soft" aria-labelledby="ex-title">
-  <div class="wrap split">
-    <div class="video-wrap">
-      <video data-lazy-video data-src="assets/media/visit.mp4" muted loop playsinline preload="none" poster="assets/media/visit-poster.jpg" aria-label="A dentist showing a patient how to brush, using a teeth model"></video>
-      <button class="video-btn" type="button"><i class="fa-solid fa-play" aria-hidden="true"></i><span data-label>Play the clip</span></button>
-    </div>
-    <div>
-      <span class="label">Your appointment</span>
-      <h2 id="ex-title">What to expect</h2>
-      <p style="margin-top:16px">We take time to explain your options using models, X-rays and your own scans, so you understand your treatment before it begins.</p>
-      <ul class="points">
-        <li><b>We explain before we treat</b><span>Models, X-rays and your own scans on screen, so you understand every step.</span></li>
-        <li><b>Gentle by default</b><span>Numbing gel before injections, and a pause whenever you raise a hand.</span></li>
-        <li><b>No surprise bills</b><span>You approve a written estimate before any treatment begins.</span></li>
-      </ul>
+<section class="section section--flush" id="clinic" aria-labelledby="cl-title">
+  <div class="wrap">
+    <div class="panel tech">
+      <div class="tech-media">
+        <div class="video-wrap">
+          <video data-lazy-video data-src="assets/media/visit.mp4" muted loop playsinline preload="none" poster="assets/media/visit-poster.jpg" aria-label="A dentist showing a patient how to brush, using a teeth model"></video>
+          <button class="video-btn" type="button"><i class="fa-solid fa-play" aria-hidden="true"></i><span data-label>Play the clip</span></button>
+        </div>
+        <div class="tech-photo"><img src="assets/img/clinic-room.webp" alt="A treatment room with a white dental chair beside the window" width="1200" height="800" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="tech-copy">
+        <span class="label">Inside the clinic</span>
+        <h2 id="cl-title">Modern equipment, explained simply</h2>
+        <p>Equipment matters most when it makes treatment easier to understand. This is what we use, and what it means for you.</p>
+        <ol class="tech-list">
+          <li><span class="num">01</span><div><h3>Low-dose digital X-rays</h3><p>Images appear on screen in seconds, so we can show you exactly what we see. The dose is a fraction of that from old film X-rays.</p></div></li>
+          <li><span class="num">02</span><div><h3>3D CBCT scans for implants</h3><p>Every implant is planned on a 3D scan of your jaw, so the position, any bone graft and the price are settled before treatment starts.</p></div></li>
+          <li><span class="num">03</span><div><h3>Intraoral scanner</h3><p>A quick digital scan replaces impression trays for crowns, veneers and aligners, and gives you a 3D model of your own teeth.</p></div></li>
+          <li><span class="num">04</span><div><h3>Magnification for root canals</h3><p>Root canals are carried out under magnification with rotary instruments, for cleaner canals and shorter appointments.</p></div></li>
+          <li><span class="num">05</span><div><h3>Hospital-grade sterilisation</h3><p>Instruments are sterilised in a Class B autoclave and opened from sealed pouches in front of you.</p></div></li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="dentists" aria-labelledby="dr-title">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label">Our team</span>
-      <h2 id="dr-title">Our dentists</h2>
-      <p>You will see the same dentist at each visit, someone who knows your history.</p>
+    <div class="head-split">
+      <div><span class="label">Our team</span><h2 id="dr-title">Meet your dentists</h2></div>
+      <div><p>You will see the same dentist at every visit, someone who knows your history.</p></div>
     </div>
-    <div class="cards-4">
-      <a class="dr-card" href="doctors/vikram-sundaram.html">
-        <div class="dr-photo"><img src="assets/img/dr-vikram.webp" alt="Portrait of Dr. Vikram Sundaram" width="720" height="900" loading="lazy" decoding="async"></div>
+    <div class="team">
+      <a class="member" href="doctors/vikram-sundaram.html">
+        <div class="member-photo"><img src="assets/img/dr-vikram.webp" alt="Portrait of Dr. Vikram Sundaram" width="720" height="900" loading="lazy" decoding="async"></div>
         <h3>Dr. Vikram Sundaram</h3>
-        <span class="dr-role">Founder &amp; Lead Implantologist</span>
-        <span class="dr-quals">BDS, MDS (Prosthodontics)</span>
+        <span class="member-role">Founder &amp; Lead Implantologist</span>
+        <span class="member-meta">24 years' experience<span class="hide-sm"> · Tamil, English, Hindi</span></span>
       </a>
-      <a class="dr-card" href="doctors/arjun-prakash.html">
-        <div class="dr-photo"><img src="assets/img/dr-arjun.webp" alt="Portrait of Dr. Arjun Prakash" width="720" height="900" loading="lazy" decoding="async"></div>
+      <a class="member" href="doctors/arjun-prakash.html">
+        <div class="member-photo"><img src="assets/img/dr-arjun.webp" alt="Portrait of Dr. Arjun Prakash" width="720" height="900" loading="lazy" decoding="async"></div>
         <h3>Dr. Arjun Prakash</h3>
-        <span class="dr-role">Endodontist · Root Canal Specialist</span>
-        <span class="dr-quals">BDS, MDS (Conservative Dentistry &amp; Endodontics)</span>
+        <span class="member-role">Endodontist · Root Canal Specialist</span>
+        <span class="member-meta">11 years' experience<span class="hide-sm"> · Tamil, English</span></span>
       </a>
-      <a class="dr-card" href="doctors/meera-krishnan.html">
-        <div class="dr-photo"><img src="assets/img/dr-meera.webp" alt="Portrait of Dr. Meera Krishnan" width="720" height="900" loading="lazy" decoding="async"></div>
+      <a class="member" href="doctors/meera-krishnan.html">
+        <div class="member-photo"><img src="assets/img/dr-meera.webp" alt="Portrait of Dr. Meera Krishnan" width="720" height="900" loading="lazy" decoding="async"></div>
         <h3>Dr. Meera Krishnan</h3>
-        <span class="dr-role">Orthodontist &amp; Children's Dentist</span>
-        <span class="dr-quals">BDS, MDS (Orthodontics)</span>
+        <span class="member-role">Orthodontist &amp; Children's Dentist</span>
+        <span class="member-meta">13 years' experience<span class="hide-sm"> · Tamil, English, Malayalam</span></span>
       </a>
-      <a class="dr-card" href="doctors/kavya-ramesh.html">
-        <div class="dr-photo"><img src="assets/img/dr-kavya.webp" alt="Portrait of Dr. Kavya Ramesh" width="720" height="900" loading="lazy" decoding="async"></div>
+      <a class="member" href="doctors/kavya-ramesh.html">
+        <div class="member-photo"><img src="assets/img/dr-kavya.webp" alt="Portrait of Dr. Kavya Ramesh" width="720" height="900" loading="lazy" decoding="async"></div>
         <h3>Dr. Kavya Ramesh</h3>
-        <span class="dr-role">Cosmetic Dentist · Smile Design</span>
-        <span class="dr-quals">BDS, Fellowship in Aesthetic Dentistry</span>
+        <span class="member-role">Cosmetic Dentist · Smile Design</span>
+        <span class="member-meta">8 years' experience<span class="hide-sm"> · Tamil, English, Telugu</span></span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="section section--soft" id="fees" aria-labelledby="fe-title">
-  <div class="wrap">
-    <div class="section-head">
+<section class="section section--soft" id="stories" aria-labelledby="st-title">
+  <div class="wrap stories" data-tabs>
+    <span class="label">Patient stories</span>
+    <h2 id="st-title">In our patients' words</h2>
+    <div class="stories-tabs" role="tablist" aria-label="Patient stories by treatment">
+      <button type="button" role="tab" id="stt-0" aria-controls="stp-0" aria-selected="true">Root canal</button>
+      <button type="button" role="tab" id="stt-1" aria-controls="stp-1" aria-selected="false" tabindex="-1">Aligners</button>
+      <button type="button" role="tab" id="stt-2" aria-controls="stp-2" aria-selected="false" tabindex="-1">Implants</button>
+      <button type="button" role="tab" id="stt-3" aria-controls="stp-3" aria-selected="false" tabindex="-1">Children</button>
+    </div>
+    <figure class="story" role="tabpanel" id="stp-0" aria-labelledby="stt-0">
+      <blockquote>I had put off a root canal for two years. Dr. Arjun finished it in one sitting, and all I felt was a little pressure.</blockquote>
+      <figcaption><b>Nithya S.</b>Root canal treatment with Dr. Arjun Prakash</figcaption>
+    </figure>
+    <figure class="story" role="tabpanel" id="stp-1" aria-labelledby="stt-1">
+      <blockquote>They showed me my new smile on a screen before I started aligners. Fourteen months later it looks exactly like the preview.</blockquote>
+      <figcaption><b>Rahul V.</b>Clear aligners with Dr. Meera Krishnan</figcaption>
+    </figure>
+    <figure class="story" role="tabpanel" id="stp-2" aria-labelledby="stt-2">
+      <blockquote>My mother is 68 and nervous of dentists. They explained every step in Tamil and wrote the cost down before touching anything.</blockquote>
+      <figcaption><b>Karthik R.</b>Implants for his mother, with Dr. Vikram Sundaram</figcaption>
+    </figure>
+    <figure class="story" role="tabpanel" id="stp-3" aria-labelledby="stt-3">
+      <blockquote>My daughter was frightened after a bad experience elsewhere. Dr. Meera let her ride the chair and count her own teeth first. Now she asks when she can go back.</blockquote>
+      <figcaption><b>Divya M.</b>Mother of a six-year-old patient</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="fees" aria-labelledby="fe-title">
+  <div class="wrap fees-layout">
+    <div class="fees-side">
       <span class="label">Fees</span>
-      <h2 id="fe-title">Treatment fees</h2>
+      <h2 id="fe-title">Clear prices, agreed in writing</h2>
       <p>Starting prices for common treatments. Your exact fee depends on your case, and you will receive an itemised written estimate before treatment begins.</p>
-    </div>
-    <ul class="fees">
-      <li><span>Consultation &amp; check-up</span><b><small>from</small>₹500</b></li>
-      <li><span>Scaling &amp; polishing</span><b><small>from</small>₹1,200</b></li>
-      <li><span>Tooth-coloured filling</span><b><small>from</small>₹1,500</b></li>
-      <li><span>Root canal treatment</span><b><small>from</small>₹4,500</b></li>
-      <li><span>Teeth whitening (in-clinic)</span><b><small>from</small>₹7,500</b></li>
-      <li><span>Porcelain veneer, per tooth</span><b><small>from</small>₹9,000</b></li>
-      <li><span>Dental implant with crown</span><b><small>from</small>₹32,000</b></li>
-      <li><span>Braces or clear aligners</span><b><small>from</small>₹35,000</b></li>
-    </ul>
-    <p class="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>If your treatment plan changes, we agree any new cost with you before continuing. EMI options are available.</span></p>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="rv-title">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="label">Patient feedback</span>
-      <h2 id="rv-title">What our patients say</h2>
-    </div>
-    <div class="cards-3">
-      <figure class="review"><blockquote>“I had put off a root canal for two years. Dr. Arjun finished it in one sitting, and all I felt was a little pressure.”</blockquote><figcaption><b>Nithya S.</b>Root canal</figcaption></figure>
-      <figure class="review"><blockquote>“They showed me my new smile on a screen before I started aligners. Fourteen months later it looks exactly like the preview.”</blockquote><figcaption><b>Rahul V.</b>Clear aligners</figcaption></figure>
-      <figure class="review"><blockquote>“My mother is 68 and nervous of dentists. They explained every step in Tamil and wrote the cost down before touching anything.”</blockquote><figcaption><b>Karthik R.</b>Implants for his mother</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="section section--soft" id="book" aria-labelledby="bk-title">
-  <div class="wrap booking">
-    <div class="booking-info">
-      <span class="label">Appointments</span>
-      <h2 id="bk-title">Book an appointment</h2>
-      <p>Send us your details and our reception team will call to confirm, usually within an hour during opening hours. For severe pain or swelling, please call us directly.</p>
-      <ul class="contact-list">
-        <li><i class="fa-solid fa-phone" aria-hidden="true"></i><span><a href="tel:+919092543740">+91 90925 43740</a><small>Reception</small></span></li>
-        <li><i class="fa-solid fa-clock" aria-hidden="true"></i><span><span class="open-badge" data-open-badge>Mon–Sat 8 AM – 9 PM</span><small>Sunday 9 AM – 1 PM</small></span></li>
-        <li><i class="fa-solid fa-kit-medical" aria-hidden="true"></i><span>Emergency helpline<small>Answered 24 hours a day</small></span></li>
-      </ul>
-    </div>
-    <form class="book-form" id="bookForm" novalidate>
-      <div class="field" data-field="name"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required><span class="err" role="alert"></span></div>
-      <div class="field" data-field="phone"><label for="f-phone">Phone number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" required><span class="err" role="alert"></span></div>
-      <div class="field"><label for="f-service">Treatment</label><select id="f-service" name="service"><option value="not-sure">Not sure, please advise</option><option value="checkups">Check-ups &amp; Cleaning</option><option value="root-canal">Root Canal Treatment</option><option value="implants">Dental Implants</option><option value="aligners">Braces &amp; Clear Aligners</option><option value="whitening">Teeth Whitening</option><option value="smile-design">Smile Design &amp; Veneers</option><option value="kids">Kids Dentistry</option><option value="gum-care">Gum Care</option><option value="emergency">Emergency Dental Care</option></select></div>
-      <div class="field"><label for="f-doctor">Preferred dentist</label><select id="f-doctor" name="doctor"><option value="any">No preference</option><option value="vikram-sundaram">Dr. Vikram Sundaram</option><option value="arjun-prakash">Dr. Arjun Prakash</option><option value="meera-krishnan">Dr. Meera Krishnan</option><option value="kavya-ramesh">Dr. Kavya Ramesh</option></select></div>
-      <div class="field" data-field="date"><label for="f-date">Preferred date</label><input id="f-date" name="date" type="date" required><span class="err" role="alert"></span></div>
-      <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
-      <fieldset class="field field--full" data-field="slot">
-        <legend>Preferred time</legend>
-        <div class="slots">
-          <input type="radio" name="slot" id="s-m" value="Morning"><label for="s-m">Morning<small>8 AM – 12 PM</small></label>
-          <input type="radio" name="slot" id="s-a" value="Afternoon"><label for="s-a">Afternoon<small>12 – 4 PM</small></label>
-          <input type="radio" name="slot" id="s-e" value="Evening"><label for="s-e">Evening<small>4 – 9 PM</small></label>
-        </div>
-        <span class="err" role="alert"></span>
-      </fieldset>
-      <div class="field field--full"><label for="f-note">Message <span class="opt">(optional)</span></label><textarea id="f-note" name="note" placeholder="Symptoms, questions, or anything we should know"></textarea></div>
-      <div class="form-foot">
-        <p>We will call to confirm your appointment. Your details are only used to arrange your visit.</p>
-        <button class="btn btn-primary" type="submit">Request appointment</button>
+      <div class="emi">
+        <h3>Spread the cost</h3>
+        <p>Larger treatments can be paid in monthly instalments.</p>
+        <ul>
+          <li><span>Dental implant with crown</span><b>about ₹2,700<small> a month</small></b></li>
+          <li><span>Braces or clear aligners</span><b>about ₹2,900<small> a month</small></b></li>
+        </ul>
+        <small class="emi-note">Over 12 months. Reception can give you the exact plan.</small>
       </div>
-    </form>
+    </div>
+    <div>
+      <ul class="fees">
+        <li><span>Consultation &amp; check-up</span><b><small>from</small>₹500</b></li>
+        <li><span>Scaling &amp; polishing</span><b><small>from</small>₹1,200</b></li>
+        <li><span>Tooth-coloured filling</span><b><small>from</small>₹1,500</b></li>
+        <li><span>Root canal treatment</span><b><small>from</small>₹4,500</b></li>
+        <li><span>Teeth whitening (in-clinic)</span><b><small>from</small>₹7,500</b></li>
+        <li><span>Porcelain veneer, per tooth</span><b><small>from</small>₹9,000</b></li>
+        <li><span>Dental implant with crown</span><b><small>from</small>₹32,000</b></li>
+        <li><span>Braces or clear aligners</span><b><small>from</small>₹35,000</b></li>
+      </ul>
+      <p class="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>If your treatment plan changes, we agree any new cost with you before continuing.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft" id="faq" aria-labelledby="hq-title">
+  <div class="wrap faq-layout">
+    <div class="faq-side">
+      <span class="label">Questions</span>
+      <h2 id="hq-title">Before your first visit</h2>
+      <p>Answers to what patients most often ask us. For anything else, send us a message.</p>
+      <a class="btn btn-outline" href="https://wa.me/919092543740?text=Hello%20Origin%20Dentals%2C%20I%20would%20like%20to%20ask%20about%20an%20appointment." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Ask on WhatsApp</a>
+    </div>
+    <div class="faq">
+      <details><summary>Will treatment hurt? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Most treatment is done under local anaesthetic, and we apply numbing gel before any injection. You can raise a hand to pause at any time.</p></details>
+      <details><summary>I'm nervous about dentists. Can you help? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Yes. Tell us when you book and we will give you a longer first appointment, explain each step before we do it, and stop whenever you ask.</p></details>
+      <details><summary>How will I know what my treatment costs? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Starting prices are listed above. After your examination you receive an itemised written estimate, and nothing starts until you have agreed to it.</p></details>
+      <details><summary>Can I pay in instalments? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Yes. EMI options are available for larger treatments such as implants, braces and clear aligners. Reception can give you the monthly breakdown.</p></details>
+      <details><summary>Can I get advice before I travel to Chennai? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Yes. Send your X-rays or photos on WhatsApp and we will outline your options and likely costs, so you can plan your visit.</p></details>
+      <details><summary>Is there parking near the clinic? <i class="fa-solid fa-plus" aria-hidden="true"></i></summary><p>Street parking is available in front of the clinic, and we are two minutes' walk from Kodambakkam bus stop.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="book" aria-labelledby="bk-title">
+  <div class="wrap">
+    <div class="book-card">
+      <div class="book-aside">
+        <span class="label">Appointments</span>
+        <h2 id="bk-title">Book an appointment</h2>
+        <p>Send us your details and our reception team will call to confirm, usually within an hour during opening hours. For severe pain or swelling, please call us directly.</p>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-phone" aria-hidden="true"></i><span><a href="tel:+919092543740">+91 90925 43740</a><small>Reception</small></span></li>
+          <li><i class="fa-solid fa-clock" aria-hidden="true"></i><span><span class="open-badge" data-open-badge>Mon–Sat 8 AM – 9 PM</span><small>Sunday 9 AM – 1 PM</small></span></li>
+          <li><i class="fa-solid fa-kit-medical" aria-hidden="true"></i><span>Emergency helpline<small>Answered 24 hours a day</small></span></li>
+        </ul>
+      </div>
+      <form class="book-form" id="bookForm" novalidate>
+        <div class="field" data-field="name"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required><span class="err" role="alert"></span></div>
+        <div class="field" data-field="phone"><label for="f-phone">Phone number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" required><span class="err" role="alert"></span></div>
+        <div class="field"><label for="f-service">Treatment</label><select id="f-service" name="service"><option value="not-sure">Not sure, please advise</option><option value="checkups">Check-ups &amp; Cleaning</option><option value="root-canal">Root Canal Treatment</option><option value="implants">Dental Implants</option><option value="aligners">Braces &amp; Clear Aligners</option><option value="whitening">Teeth Whitening</option><option value="smile-design">Smile Design &amp; Veneers</option><option value="kids">Kids Dentistry</option><option value="gum-care">Gum Care</option><option value="emergency">Emergency Dental Care</option></select></div>
+        <div class="field"><label for="f-doctor">Preferred dentist</label><select id="f-doctor" name="doctor"><option value="any">No preference</option><option value="vikram-sundaram">Dr. Vikram Sundaram</option><option value="arjun-prakash">Dr. Arjun Prakash</option><option value="meera-krishnan">Dr. Meera Krishnan</option><option value="kavya-ramesh">Dr. Kavya Ramesh</option></select></div>
+        <div class="field" data-field="date"><label for="f-date">Preferred date</label><input id="f-date" name="date" type="date" required><span class="err" role="alert"></span></div>
+        <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <fieldset class="field field--full" data-field="slot">
+          <legend>Preferred time</legend>
+          <div class="slots">
+            <input type="radio" name="slot" id="s-m" value="Morning"><label for="s-m">Morning<small>8 AM – 12 PM</small></label>
+            <input type="radio" name="slot" id="s-a" value="Afternoon"><label for="s-a">Afternoon<small>12 – 4 PM</small></label>
+            <input type="radio" name="slot" id="s-e" value="Evening"><label for="s-e">Evening<small>4 – 9 PM</small></label>
+          </div>
+          <span class="err" role="alert"></span>
+        </fieldset>
+        <div class="field field--full"><label for="f-note">Message <span class="opt">(optional)</span></label><textarea id="f-note" name="note" placeholder="Symptoms, questions, or anything we should know"></textarea></div>
+        <div class="form-foot">
+          <p>We will call to confirm your appointment. Your details are only used to arrange your visit.</p>
+          <button class="btn btn-primary" type="submit">Request appointment</button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 

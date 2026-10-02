@@ -7,11 +7,12 @@ Static HTML, CSS and JavaScript. No build step: deploy the folder as-is (for exa
 ## Structure
 
 ```
-index.html            home: hero video, smile check, treatments, dentists, prices, booking, map
+index.html            home: hero video with quick booking, treatments, symptom finder, clinic story,
+                      equipment, dentists, patient stories, fees, FAQ, booking, map
 services/*.html       9 treatment pages
 doctors/*.html        4 dentist profiles
 assets/site.css       styles (light purple + white)
-assets/site.js        menus, open-now badge, counters, lazy video, booking form
+assets/site.js        menus, open-now badge, tabs, lazy video, quick booking, booking form
 assets/img, media     photos, posters and video
 ```
 
