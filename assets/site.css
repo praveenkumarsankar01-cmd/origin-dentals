@@ -70,7 +70,10 @@ h3 { font-size: 1.08rem; line-height: 1.35; letter-spacing: -.01em; }
 .btn-wa { background: var(--wa); color: #fff; }
 .btn-wa:hover { color: #fff; filter: brightness(.95); }
 .btn-sm { padding: 11px 16px; font-size: .9rem; }
-.btn .fa-arrow-right { font-size: .8em; }
+.btn .ic-arrow-right { font-size: .8em; }
+/* inline SVG icons: size and colour follow the surrounding text, as the icon font did */
+.ic { display: inline-block; height: 1em; line-height: 1; vertical-align: -0.125em; font-style: normal; flex: none; }
+.ic svg { display: block; height: 1em; width: auto; fill: currentColor; overflow: visible; }
 .text-link { font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
 .text-link i { font-size: .78em; transition: transform .2s; }
 .text-link:hover i { transform: translateX(3px); }

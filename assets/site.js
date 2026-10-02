@@ -147,14 +147,16 @@
   $$('[data-lazy-video]').forEach(function (v) {
     var btn = v.parentElement.querySelector('.video-btn');
     var label = btn && btn.querySelector('[data-label]');
-    var icon = btn && btn.querySelector('i');
+    var playIcon = btn && btn.querySelector('.ic-play');
+    var pauseIcon = btn && btn.querySelector('.ic-pause');
     var loaded = false;
     var load = function () { if (loaded) return; loaded = true; v.src = v.getAttribute('data-src'); };
     var sync = function () {
       if (!btn) return;
       var playing = !v.paused;
       if (label) label.textContent = playing ? 'Pause' : 'Play the clip';
-      if (icon) icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+      if (playIcon) playIcon.hidden = playing;
+      if (pauseIcon) pauseIcon.hidden = !playing;
     };
     v.addEventListener('play', sync); v.addEventListener('pause', sync);
     if (btn) btn.addEventListener('click', function () { load(); v.paused ? v.play().catch(function () {}) : v.pause(); });
