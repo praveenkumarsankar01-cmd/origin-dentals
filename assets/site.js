@@ -123,11 +123,25 @@
   });
 
   /* ---------- videos ---------- */
+  // The hero shows its poster at once; the video is fetched only after the page has finished
+  // loading, so it never competes with the content. Phones get a lighter portrait cut, and
+  // nothing is fetched with reduced motion, Data Saver or a 2G connection.
   var hero = $('[data-hero-video]');
   if (hero) {
-    if (reduceMotion) { hero.removeAttribute('autoplay'); hero.pause(); }
-    else if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? hero.play().catch(function () {}) : hero.pause(); }); }, { threshold: 0.15 }).observe(hero);
+    var conn = navigator.connection || {};
+    var skipVideo = reduceMotion || conn.saveData || /2g/.test(conn.effectiveType || '');
+    var startHero = function () {
+      var phone = window.matchMedia('(max-width: 640px)').matches && hero.getAttribute('data-src-phone');
+      hero.src = hero.getAttribute(phone ? 'data-src-phone' : 'data-src');
+      var play = function () { hero.play().catch(function () {}); };
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? play() : hero.pause(); }); }, { threshold: 0.15 }).observe(hero);
+      } else play();
+    };
+    var whenIdle = function (fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 2000 }); else setTimeout(fn, 200); };
+    if (!skipVideo) {
+      if (document.readyState === 'complete') whenIdle(startHero);
+      else window.addEventListener('load', function () { whenIdle(startHero); });
     }
   }
   $$('[data-lazy-video]').forEach(function (v) {

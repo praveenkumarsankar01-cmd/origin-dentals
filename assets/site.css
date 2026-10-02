@@ -345,8 +345,10 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 
 /* ---------- location ---------- */
 .location { display: grid; grid-template-columns: 1.4fr .6fr; gap: 20px; }
-.map { border-radius: var(--radius); overflow: hidden; min-height: 380px; background: var(--tint); border: 1px solid var(--line); }
-.map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+.map { position: relative; border-radius: var(--radius); overflow: hidden; min-height: 380px; background: var(--tint); border: 1px solid var(--line); }
+/* shown behind the map until Google's frame paints, so the box never looks empty */
+.map::before { content: "Loading map\2026"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-3); font-weight: 600; font-size: .95rem; }
+.map iframe { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
 .location > * { min-width: 0; }
 .loc-info { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 18px; background: #fff; overflow-wrap: anywhere; }
 .loc-info b { display: block; color: var(--text); font-size: .9rem; margin-bottom: 2px; }
