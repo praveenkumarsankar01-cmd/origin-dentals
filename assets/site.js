@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var WA_NUMBER = '919092543740';
+  var WA_NUMBER = '910000000000';
   var TZ = 'Asia/Kolkata';
   // 0 = Sunday … 6 = Saturday; hours in 24h decimal
   var HOURS = { 0: [9, 13], 1: [8, 21], 2: [8, 21], 3: [8, 21], 4: [8, 21], 5: [8, 21], 6: [8, 21] };
