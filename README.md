@@ -23,3 +23,5 @@ The form validates in the browser, shows a confirmation and offers to send the r
 ## Media
 
 Photos from [Unsplash](https://unsplash.com/license) and video from [Mixkit](https://mixkit.co/license/#videoFree), both free for commercial use. The clinic, dentists and patient stories are fictional.
+
+The phone number (+91 00000 00000), email (hello@example.com) and WhatsApp link are placeholders, and the map shows Chennai without a pin or street address.
