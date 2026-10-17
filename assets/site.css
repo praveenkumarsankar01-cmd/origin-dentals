@@ -70,6 +70,8 @@ h3 { font-size: 1.05rem; line-height: 1.4; letter-spacing: -.005em; }
 .head-split .text-link { margin-top: 10px; }
 .label { display: block; font-size: .76rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
 .muted { color: var(--text-3); }
+/* a shorter version of a passage, shown on phones instead of the full text */
+.text-short { display: none; }
 
 .skip-link { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--text); color: #fff; padding: 10px 16px; border-radius: 6px; }
 .skip-link:focus { left: 8px; color: #fff; }
@@ -647,6 +649,8 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .statement { font-size: 1.3rem; }
   .figures dd { font-size: 2rem; }
 
+  .text-full { display: none; }
+  .text-short { display: inline; }
   .leaders { padding: 26px 0 28px; }
   .leaders-copy p { text-align: left; font-size: .95rem; line-height: 1.75; }
   .years-ico { width: 58px; }

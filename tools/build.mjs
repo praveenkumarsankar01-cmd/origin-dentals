@@ -357,7 +357,7 @@ function home() {
   <div class="wrap leaders-grid">
     <div class="leaders-copy">
       <h2 id="ld-title" class="sr-only">Our managing directors</h2>
-      <p>${C.name}, established in ${C.founded}, is a multispeciality dental practice in the heart of Chennai, India. With a highly trained team of dentists and assistants, we promise to care for all the dental needs of you and your family.</p>
+      <p><span class="text-full">${C.name}, established in ${C.founded}, is a multispeciality dental practice in the heart of Chennai, India. With a highly trained team of dentists and assistants, we promise to care for all the dental needs of you and your family.</span><span class="text-short">Multispeciality dental care in the heart of Chennai since ${C.founded}, for your whole family.</span></p>
       <div class="years">
         <svg class="years-ico" viewBox="0 0 96 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6C2 24 2 56 14 74M82 6c12 18 12 50 0 68"/><path transform="translate(22 6) scale(.82)" vector-effect="non-scaling-stroke" d="M24 12c-5.5 0-9 4.2-9 10 0 4.8 1.8 8.4 3 12.4 1.4 4.8 1.6 11 3.6 15.6.8 1.8 1.9 2.6 2.9 2.6 1.8 0 2.4-2 2.9-4.6l1.4-7.6c.5-2.6 1.6-4 3.2-4s2.7 1.4 3.2 4l1.4 7.6c.5 2.6 1.1 4.6 2.9 4.6 1 0 2.1-.8 2.9-2.6 2-4.6 2.2-10.8 3.6-15.6 1.2-4 3-7.6 3-12.4 0-5.8-3.5-10-9-10-3.4 0-5.6 1.8-8 1.8S27.4 12 24 12z"/></svg>
         <div><b>25+ years</b><span>of ${C.name}</span></div>
