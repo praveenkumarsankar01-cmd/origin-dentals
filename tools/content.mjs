@@ -8,14 +8,13 @@
 export const clinic = {
   name: 'Origin Dental',
   tagline: 'Advanced Dentistry · Simplified',
-  phone: '+91 90925 43740',
-  tel: '+919092543740',
-  wa: '919092543740',
-  email: 'praveenkumarsankar01@gmail.com',
-  address: 'Near Kodambakkam Bus Stop, Chennai 600024',
-  street: 'Near Kodambakkam Bus Stop',
-  lat: 13.051924,
-  lng: 80.2303326,
+  // placeholders: no real phone, email or street address on the concept site
+  phone: '+91 00000 00000',
+  tel: '+910000000000',
+  wa: '910000000000',
+  email: 'hello@example.com',
+  address: 'Chennai, Tamil Nadu',
+  mapQuery: 'Kodambakkam, Chennai', // the map and directions show the neighbourhood, not a street address
   founded: 2000,
   hours: [
     [1, 'Monday', '8:00 AM – 9:00 PM'], [2, 'Tuesday', '8:00 AM – 9:00 PM'], [3, 'Wednesday', '8:00 AM – 9:00 PM'],

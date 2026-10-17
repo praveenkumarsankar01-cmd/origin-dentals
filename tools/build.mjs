@@ -16,8 +16,8 @@ const V = { css: hash('assets/site.css'), js: hash('assets/site.js') };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const WA_TEXT = encodeURIComponent(`Hello ${C.name}, I would like to ask about an appointment.`);
 const WA = `https://wa.me/${C.wa}?text=${WA_TEXT}`;
-const MAP = `https://maps.google.com/maps?q=${C.lat},${C.lng}&amp;z=15&amp;output=embed`;
-const DIRECTIONS = `https://www.google.com/maps/dir/?api=1&amp;destination=${C.lat},${C.lng}`;
+const MAP = `https://maps.google.com/maps?q=${encodeURIComponent(C.mapQuery)}&amp;z=14&amp;output=embed`;
+const DIRECTIONS = `https://www.google.com/maps/dir/?api=1&amp;destination=${encodeURIComponent(C.mapQuery)}`;
 // logo size from the PNG header, shown 64px tall
 const png = readFileSync(join(ROOT, 'assets/img/logo.png'));
 const LOGO = { w: Math.round(png.readUInt32BE(16) * 64 / png.readUInt32BE(20)), h: 64 };
@@ -250,7 +250,7 @@ function reviewsBand(R) {
 </section>`;
 }
 
-function findUs(R, intro = "Two minutes' walk from Kodambakkam bus stop and a short auto ride from Kodambakkam railway station. Street parking is available in front of the clinic.") {
+function findUs(R, intro = 'We are in Kodambakkam, west Chennai, with street parking in front of the clinic.') {
   return `
 <section class="section" id="find" aria-labelledby="find-title">
   <div class="wrap">
@@ -261,7 +261,7 @@ function findUs(R, intro = "Two minutes' walk from Kodambakkam bus stop and a sh
     </div>
     <div class="location">
       <div class="map">
-        <iframe src="${MAP}" title="Map showing ${C.name} near Kodambakkam Bus Stop, Chennai" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <iframe src="${MAP}" title="Map of Kodambakkam, Chennai" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
       <div class="loc-info">
         <div><b>Address</b><span>${C.address}</span></div>
@@ -315,8 +315,7 @@ function home() {
   const ld = `\n<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Dentist', name: C.name, slogan: C.tagline, logo: 'assets/img/logo.png', image: 'assets/img/clinic-room.webp',
     telephone: C.phone, email: C.email, priceRange: '$$', foundingDate: String(C.founded),
-    address: { '@type': 'PostalAddress', streetAddress: C.street, addressLocality: 'Chennai', addressRegion: 'Tamil Nadu', postalCode: '600024', addressCountry: 'IN' },
-    geo: { '@type': 'GeoCoordinates', latitude: C.lat, longitude: C.lng },
+    address: { '@type': 'PostalAddress', addressLocality: 'Chennai', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '21:00' },
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '09:00', closes: '13:00' }]
@@ -428,7 +427,7 @@ function home() {
       <div class="about-card">
         <span class="label">About the practice</span>
         <h2 id="ab-title">Caring for Chennai families since ${C.founded}</h2>
-        <p>${C.name} opened in ${C.founded} as a two-chair practice beside Kodambakkam bus stop. Today six specialists and our own dental laboratory work from the same clinic and share one patient record, so the dentist treating you always has your full history.</p>
+        <p>${C.name} opened in ${C.founded} as a two-chair practice in Kodambakkam. Today six specialists and our own dental laboratory work from the same clinic and share one patient record, so the dentist treating you always has your full history.</p>
         <figure class="pull">
           <blockquote>“A fixed tooth changes how someone eats, talks and smiles. I want every patient to know exactly what that will take before we begin.”</blockquote>
           <figcaption>${drThumb(R, D['vikram-sundaram'], 46)}<span><b>Dr. Vikram Sundaram</b>Lead Implantologist</span></figcaption>
@@ -563,7 +562,7 @@ ${moreTreatments(R, otherHome)}
       <details><summary>How will I know what my treatment costs? ${ic('plus')}</summary><p>Each treatment page shows its starting price. After your examination you receive an itemised written estimate, and nothing starts until you have agreed to it.</p></details>
       <details><summary>Can I pay in instalments? ${ic('plus')}</summary><p>Yes. EMI options are available for larger treatments such as implants, braces and clear aligners. Reception can give you the monthly breakdown.</p></details>
       <details><summary>Can I get advice before I travel to Chennai? ${ic('plus')}</summary><p>Yes. Send your X-rays or photos on WhatsApp and we will outline your options and likely costs, so you can plan your visit. See <a href="international-patients.html">international patients</a>.</p></details>
-      <details><summary>Is there parking near the clinic? ${ic('plus')}</summary><p>Street parking is available in front of the clinic, and we are two minutes' walk from Kodambakkam bus stop.</p></details>
+      <details><summary>Is there parking near the clinic? ${ic('plus')}</summary><p>Street parking is available in front of the clinic.</p></details>
     </div>
   </div>
 </section>
@@ -895,7 +894,7 @@ function intlPage() {
   </div>
 </section>
 ${reviewsBand(R)}
-${findUs(R, "Ten minutes from Chennai Central by car, and about forty minutes from Chennai International Airport. Two minutes' walk from Kodambakkam bus stop.")}
+${findUs(R, "Ten minutes from Chennai Central by car, and about forty minutes from Chennai International Airport.")}
 
 </main>` + foot(R, false);
 }

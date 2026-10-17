@@ -33,6 +33,7 @@ assets/img, media             photos, logo, posters and video
 
 ## Before launch
 
+- **Contact details**: the phone number (+91 00000 00000), email (hello@example.com) and WhatsApp link are placeholders, and the map and directions show the Kodambakkam area rather than a street address. Set the real ones in `clinic` in `tools/content.mjs`.
 - **Google reviews**: the reviews band uses placeholder reviews (`reviews` in `tools/content.mjs`). Replace them with the clinic's own Google reviews (Places API or a reviews widget) before the site represents a real clinic.
 - **Booking**: the form validates in the browser, shows a confirmation and offers to send the request on WhatsApp. It does not store bookings yet; it can be connected to Firebase and an admin dashboard in the same way as the Alpha Clinic project.
 
