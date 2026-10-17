@@ -321,15 +321,19 @@ function home() {
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '21:00' },
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '09:00', closes: '13:00' }]
   })}</script>`;
-  // photo: another treatment's photo when the tile's own would not suit the crop
-  const tile = (k, cls, sizes, title = S[k].title, text = '', photo = S[k]) => `<a class="tile${cls ? ' ' + cls : ''}" href="services/${k}.html">
-        ${svcImg(R, { ...photo, alt: '' }, sizes)}
-        <div class="tile-body">
-          <h3>${esc(title)}</h3>${text ? `\n          <p>${esc(text)}</p>` : ''}
-          <span class="tile-price">${S[k].priceText ? esc(S[k].priceText) : `From <b>${S[k].price}</b>`}${ic('arrow-right')}</span>
+  // treatment card: photo, icon badge on the photo's edge, short text, price
+  // title/text/photo override the treatment's own where the card covers more than one page
+  const card = (k, { title = S[k].title, text = S[k].card, photo = S[k] } = {}) => `<a class="svc-card" href="services/${k}.html">
+        <div class="svc-card-media">
+          <div class="svc-card-img">${svcImg(R, { ...photo, alt: '' }, '(max-width: 900px) calc(50vw - 30px), 270px')}</div>
+          <span class="svc-card-badge">${iconSvg(S[k].icon)}</span>
+        </div>
+        <div class="svc-card-body">
+          <h3>${esc(title)}</h3>
+          <p>${esc(text)}</p>
+          <div class="svc-card-foot"><span>${S[k].priceText ? esc(S[k].priceText) : `From <b>${S[k].price}</b>`}</span><span class="text-link">Learn more ${ic('arrow-right')}</span></div>
         </div>
       </a>`;
-  const small = '(max-width: 640px) 252px, (max-width: 900px) calc(50vw - 25px), 327px';
   const finder = [
     ['Toothache or sensitivity', 'svc-checkups', '40% 50%', 'root-canal', 'Pain that lingers after something hot or cold, or wakes you at night, usually means the nerve inside the tooth is inflamed. A bite test and a digital X-ray show which tooth it is, and whether a filling is enough or it needs a root canal.', [['Treatment time', '60–90 minutes'], ['Visits', '1–2 visits'], ['Fee', 'From $50']]],
     ['Chipped or broken tooth', 'svc-emergency', '55% 40%', 'emergency', 'A small chip can usually be repaired with tooth-coloured bonding in one visit; a larger break may need a crown. Keep any broken piece, avoid chewing on that side, and come in the same day.', [['Availability', 'Same-day slots'], ['Helpline', 'Answered 24/7'], ['Fee', 'Consultation $8']]],
@@ -391,21 +395,21 @@ function home() {
   </div>
 </section>
 
-<section class="section section--flush" id="treatments" aria-labelledby="tr-title">
+<section class="section section--soft" id="treatments" aria-labelledby="tr-title">
   <div class="wrap">
     <div class="head-split">
       <div><span class="label">Treatments</span><h2 id="tr-title">General, specialist and cosmetic dentistry</h2></div>
       <div><p>All ${all.length} treatments are carried out in one clinic, with one patient record shared between our dentists.</p><a class="text-link" href="services/index.html">See all treatments ${ic('arrow-right')}</a></div>
     </div>
-    <div class="bento">
-      ${tile('implants', 'tile--lg', '(max-width: 640px) 519px, (max-width: 900px) calc(100vw - 40px), 678px', 'Dental Implants', 'Fixed, natural-looking replacements for missing teeth.')}
-      ${tile('root-canal', 'tile--wide', '(max-width: 900px) calc(100vw - 40px), 552px')}
-      ${tile('braces', '', small, 'Braces & Clear Aligners', '', S.aligners)}
-      ${tile('whitening', '', small)}
-      ${tile('checkups', '', small)}
-      ${tile('smile-design', '', small, 'Smile Makeovers')}
-      ${tile('gum-care', '', small, 'Gum Care')}
-      ${tile('kids', '', small)}
+    <div class="svc-cards">
+      ${card('implants')}
+      ${card('root-canal')}
+      ${card('braces', { title: 'Braces & Clear Aligners', text: 'Braces and nearly invisible clear aligners, for children and adults.', photo: S.aligners })}
+      ${card('whitening')}
+      ${card('checkups')}
+      ${card('smile-design', { title: 'Smile Makeovers' })}
+      ${card('gum-care', { title: 'Gum Care' })}
+      ${card('kids')}
     </div>
     <div class="urgent">
       <div><h3>In pain right now?</h3><p>We keep same-day emergency slots every day, and the helpline is answered 24 hours a day.</p></div>
