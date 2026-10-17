@@ -651,14 +651,18 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 
   .text-full { display: none; }
   .text-short { display: inline; }
-  .leaders { padding: 26px 0 28px; }
-  .leaders-copy p { text-align: left; font-size: .95rem; line-height: 1.75; }
-  .years-ico { width: 58px; }
-  .years b { font-size: 2.3rem; }
-  .leaders-docs { gap: 14px; }
-  .leader-photo { width: min(100%, 150px); border-width: 3px; margin-bottom: 10px; }
-  .leader h3 { font-size: .95rem; }
-  .leader-quals { font-size: .56rem; letter-spacing: .14em; }
+  /* compact band: short text, small photos, both doctors side by side */
+  .leaders { padding: 18px 0 20px; }
+  .leaders-grid { gap: 14px; }
+  .leaders-copy p { text-align: left; font-size: .84rem; line-height: 1.6; }
+  .years { margin-top: 10px; gap: 8px; }
+  .years-ico { width: 36px; }
+  .years b { font-size: 1.55rem; }
+  .years span { margin-top: 2px; font-size: .8rem; }
+  .leaders-docs { gap: 10px; }
+  .leader-photo { width: 84px; border-width: 3px; margin-bottom: 6px; }
+  .leader h3 { font-size: .8rem; line-height: 1.25; padding: 0 4px; }
+  .leader-quals { margin-top: 3px; font-size: .46rem; letter-spacing: .08em; line-height: 1.6; }
 
   .svc-cards { gap: 12px; }
   .svc-card-badge { left: 12px; bottom: -22px; width: 44px; height: 44px; border-width: 3px; }
