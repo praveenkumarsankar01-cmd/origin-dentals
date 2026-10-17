@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Origin Dentals — site behaviour
+   Origin Dental — site behaviour
    No dependencies. Everything degrades to plain links/forms without JS.
    ========================================================================== */
 (function () {
@@ -21,35 +21,58 @@
     onScroll();
   }
 
-  /* ---------- desktop dropdowns ---------- */
+  /* ---------- desktop drop-downs (two levels: Services > Teeth Replacement > …) ---------- */
+  var canHover = window.matchMedia('(hover: hover)').matches;
   var toggles = $$('[data-dropdown]');
-  function closeAll(except) {
-    toggles.forEach(function (b) {
-      if (b === except) return;
-      b.setAttribute('aria-expanded', 'false');
-      var m = document.getElementById(b.getAttribute('aria-controls'));
-      if (m) m.classList.remove('is-open');
+  var subToggles = $$('.dd-parent');
+  function setMenu(btn, open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var m = document.getElementById(btn.getAttribute('aria-controls'));
+    if (m) m.classList.toggle('is-open', open);
+    if (btn.classList.contains('dd-parent')) btn.parentElement.classList.toggle('is-open', open);
+    if (!open && m) $$('.dd-parent', m).forEach(function (s) { setMenu(s, false); });
+  }
+  function closeAll(except) { toggles.forEach(function (b) { if (b !== except) setMenu(b, false); }); }
+  function hoverable(li, btn, siblings) {
+    if (!canHover) return;
+    var t;
+    li.addEventListener('mouseenter', function () {
+      clearTimeout(t);
+      siblings.forEach(function (b) { if (b !== btn) setMenu(b, false); });
+      setMenu(btn, true);
     });
+    li.addEventListener('mouseleave', function () { t = setTimeout(function () { setMenu(btn, false); }, 180); });
   }
   toggles.forEach(function (btn) {
-    var menu = document.getElementById(btn.getAttribute('aria-controls'));
-    var li = btn.parentElement;
-    var set = function (open) {
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (menu) menu.classList.toggle('is-open', open);
-    };
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       var open = btn.getAttribute('aria-expanded') !== 'true';
-      closeAll(btn); set(open);
+      closeAll(btn); setMenu(btn, open);
     });
-    if (window.matchMedia('(hover: hover)').matches) {
-      var t;
-      li.addEventListener('mouseenter', function () { clearTimeout(t); closeAll(btn); set(true); });
-      li.addEventListener('mouseleave', function () { t = setTimeout(function () { set(false); }, 160); });
-    }
+    hoverable(btn.parentElement, btn, toggles);
+  });
+  subToggles.forEach(function (btn) {
+    var siblings = $$('.dd-parent', btn.closest('.dd'));
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      siblings.forEach(function (b) { if (b !== btn) setMenu(b, false); });
+      setMenu(btn, open);
+      if (open) { var first = $('a', document.getElementById(btn.getAttribute('aria-controls'))); if (first && e.detail === 0) first.focus(); }
+    });
+    btn.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); btn.click(); } });
+    hoverable(btn.parentElement, btn, siblings);
+  });
+  // close a sub-menu with ArrowLeft, returning focus to its parent item
+  $$('.dd--sub').forEach(function (sub) {
+    sub.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft') return;
+      var p = sub.parentElement.querySelector('.dd-parent');
+      e.preventDefault(); setMenu(p, false); p.focus();
+    });
   });
   document.addEventListener('click', function (e) { if (!e.target.closest('.nav-links')) closeAll(); });
+  document.addEventListener('focusin', function (e) { if (!e.target.closest('.nav-links')) closeAll(); });
 
   /* ---------- mobile drawer ---------- */
   var drawer = $('#drawer');
@@ -122,51 +145,97 @@
     show(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0], false, false);
   });
 
-  /* ---------- videos ---------- */
-  // The hero shows its poster at once; the video is fetched only after the page has finished
-  // loading, so it never competes with the content. Phones get a lighter portrait cut, and
-  // nothing is fetched with reduced motion, Data Saver or a 2G connection.
-  var hero = $('[data-hero-video]');
-  if (hero) {
-    var conn = navigator.connection || {};
-    var skipVideo = reduceMotion || conn.saveData || /2g/.test(conn.effectiveType || '');
-    var startHero = function () {
-      var phone = window.matchMedia('(max-width: 640px)').matches && hero.getAttribute('data-src-phone');
-      hero.src = hero.getAttribute(phone ? 'data-src-phone' : 'data-src');
-      var play = function () { hero.play().catch(function () {}); };
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? play() : hero.pause(); }); }, { threshold: 0.15 }).observe(hero);
-      } else play();
-    };
-    var whenIdle = function (fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 2000 }); else setTimeout(fn, 200); };
-    if (!skipVideo) {
-      if (document.readyState === 'complete') whenIdle(startHero);
-      else window.addEventListener('load', function () { whenIdle(startHero); });
-    }
-  }
-  $$('[data-lazy-video]').forEach(function (v) {
+  /* ---------- videos ----------
+     Every video shows its poster first and fetches the clip only when it is needed: the clinic tour at
+     the top once the page has finished loading, the others as they scroll into view. Phones get a lighter
+     cut and wide screens a full-HD one. With reduced motion, Data Saver or 2G nothing plays until asked. */
+  var conn = navigator.connection || {};
+  var lowData = conn.saveData || /2g/.test(conn.effectiveType || '');
+  var whenIdle = function (fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 2000 }); else setTimeout(fn, 200); };
+  var mq = function (q) { return window.matchMedia(q).matches; };
+  $$('[data-video]').forEach(function (v) {
     var btn = v.parentElement.querySelector('.video-btn');
     var label = btn && btn.querySelector('[data-label]');
+    var playText = label ? label.textContent : '';
     var playIcon = btn && btn.querySelector('.ic-play');
     var pauseIcon = btn && btn.querySelector('.ic-pause');
-    var loaded = false;
-    var load = function () { if (loaded) return; loaded = true; v.src = v.getAttribute('data-src'); };
+    var loaded = false, userPaused = false, inView = false, ready = !v.hasAttribute('data-after-load');
+    var auto = !reduceMotion && !lowData;
+    var load = function () {
+      if (loaded) return; loaded = true;
+      var src = v.getAttribute('data-src');
+      if (mq('(max-width: 640px)') && v.getAttribute('data-src-phone')) src = v.getAttribute('data-src-phone');
+      else if (mq('(min-width: 1400px)') && !lowData && v.getAttribute('data-src-hd')) src = v.getAttribute('data-src-hd');
+      v.src = src;
+    };
+    var play = function () { load(); v.play().catch(function () {}); };
     var sync = function () {
       if (!btn) return;
       var playing = !v.paused;
-      if (label) label.textContent = playing ? 'Pause' : 'Play the clip';
+      if (label) label.textContent = playing ? 'Pause' : playText;
       if (playIcon) playIcon.hidden = playing;
       if (pauseIcon) pauseIcon.hidden = !playing;
     };
+    var update = function () { if (ready && inView && auto && !userPaused) play(); else if (!inView && loaded) v.pause(); };
     v.addEventListener('play', sync); v.addEventListener('pause', sync);
-    if (btn) btn.addEventListener('click', function () { load(); v.paused ? v.play().catch(function () {}) : v.pause(); });
+    if (btn) btn.addEventListener('click', function () {
+      if (v.paused) { userPaused = false; play(); } else { userPaused = true; v.pause(); }
+    });
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting) { load(); if (!reduceMotion) v.play().catch(function () {}); }
-          else if (loaded) v.pause();
-        });
-      }, { rootMargin: '200px 0px', threshold: 0.25 }).observe(v);
+      new IntersectionObserver(function (es) { inView = es[0].isIntersecting; update(); }, { rootMargin: '200px 0px', threshold: 0.25 }).observe(v);
+    }
+    if (!ready) {
+      var go = function () { whenIdle(function () { ready = true; update(); }); };
+      if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+    }
+  });
+
+  /* ---------- carousels (other treatments, Google reviews) ----------
+     A scroll-snapping row: swipe or scroll natively, arrows move one screenful and wrap round,
+     optional dots, and a gentle autoplay that stops for hover, focus, touch and reduced motion. */
+  $$('[data-carousel]').forEach(function (track) {
+    var box = track.closest('[data-carousel-box]') || track.parentElement;
+    var items = Array.prototype.slice.call(track.children);
+    var dotsBox = track.getAttribute('data-dots') && document.getElementById(track.getAttribute('data-dots'));
+    var behavior = reduceMotion ? 'auto' : 'smooth';
+    var step = function () { return items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : track.clientWidth; };
+    var perView = function () { return Math.max(1, Math.round(track.clientWidth / step())); };
+    var atEnd = function () { return track.scrollLeft + track.clientWidth >= track.scrollWidth - 4; };
+    function go(dir) {
+      if (dir > 0 && atEnd()) return track.scrollTo({ left: 0, behavior: behavior });
+      if (dir < 0 && track.scrollLeft <= 4) return track.scrollTo({ left: track.scrollWidth, behavior: behavior });
+      track.scrollBy({ left: dir * step() * perView(), behavior: behavior });
+    }
+    var prev = $('[data-car-prev]', box), next = $('[data-car-next]', box);
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.target !== track) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    });
+    if (dotsBox) {
+      var renderDots = function () {
+        var pages = Math.max(1, Math.ceil(items.length / perView()));
+        if (dotsBox.children.length !== pages) dotsBox.innerHTML = new Array(pages + 1).join('<span></span>');
+        var page = atEnd() ? pages - 1 : Math.round(track.scrollLeft / (step() * perView()));
+        Array.prototype.forEach.call(dotsBox.children, function (d, i) { d.classList.toggle('is-active', i === page); });
+      };
+      var raf;
+      track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(renderDots); }, { passive: true });
+      window.addEventListener('resize', renderDots);
+      renderDots();
+    }
+    var every = +track.getAttribute('data-autoplay');
+    if (every && !reduceMotion && 'IntersectionObserver' in window) {
+      var timer, visible = false, held = false;
+      var tick = function () { clearInterval(timer); if (visible && !held) timer = setInterval(function () { go(1); }, every); };
+      var hold = function () { held = true; tick(); };
+      var release = function () { held = false; tick(); };
+      box.addEventListener('mouseenter', hold); box.addEventListener('mouseleave', release);
+      box.addEventListener('focusin', hold); box.addEventListener('focusout', release);
+      track.addEventListener('touchstart', function () { held = true; tick(); }, { passive: true });
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; tick(); }, { threshold: 0.4 }).observe(track);
     }
   });
 
@@ -269,7 +338,7 @@
       $('#sumService').textContent = data.service;
       $('#sumDoctor').textContent = data.doctor;
       $('#sumWhen').textContent = data.when;
-      var msg = 'Hello Origin Dentals, I would like to book a visit.\n' +
+      var msg = 'Hello Origin Dental, I would like to book a visit.\n' +
         'Name: ' + data.name + '\nPhone: ' + data.phone + '\nTreatment: ' + data.service +
         '\nDentist: ' + data.doctor + '\nWhen: ' + data.when + (data.note ? '\nNote: ' + data.note : '');
       $('#waSend').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
