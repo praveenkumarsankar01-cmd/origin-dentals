@@ -340,25 +340,6 @@ h3 { font-size: 1.05rem; line-height: 1.4; letter-spacing: -.005em; }
 .story figcaption { margin-top: 24px; font-size: .94rem; color: var(--text-3); }
 .story figcaption b { display: block; color: var(--text); font-size: 1rem; font-weight: 600; }
 
-/* ---------- fees: price list beside an EMI note ---------- */
-.fees-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
-.fees-side > p { margin: 14px 0 0; color: var(--text-3); font-size: 1.01rem; }
-.emi { margin-top: 30px; padding: 24px 26px; border-radius: var(--radius); background: var(--soft); border: 1px solid var(--line); }
-.emi h3 { font-size: 1.04rem; }
-.emi p { margin: 4px 0 12px; font-size: .93rem; color: var(--text-3); }
-.emi ul { list-style: none; margin: 0; padding: 0; }
-.emi li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: .93rem; color: var(--text); }
-.emi li b { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
-.emi li small { color: var(--text-3); font-weight: 400; }
-.emi-note { display: block; margin-top: 8px; color: var(--text-3); font-size: .8rem; }
-.fees { display: grid; grid-template-columns: 1fr; column-gap: 40px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-.fees li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-.fees span { color: var(--text); font-weight: 400; }
-.fees b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.fees b small { color: var(--text-3); font-weight: 400; font-size: .78rem; margin-right: 4px; }
-.note { margin: 22px 0 0; color: var(--text-3); font-size: .92rem; display: flex; gap: 10px; }
-.note i { color: var(--brand); margin-top: 5px; }
-
 /* ---------- home FAQ: sticky intro + questions ---------- */
 .faq-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
 .faq-side { position: sticky; top: 120px; }
@@ -604,9 +585,6 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 /* ==========================================================================
    Responsive
    ========================================================================== */
-@media (min-width: 1000px) {
-  .fees--2 { grid-template-columns: 1fr 1fr; }
-}
 @media (max-width: 1180px) {
   .topbar .hide-lg { display: none; }
   .nav-top { padding: 0 10px; font-size: .84rem; letter-spacing: .03em; }
@@ -621,7 +599,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .more-track { grid-auto-columns: calc((100% - 2 * 24px) / 3); gap: 24px; }
 }
 @media (max-width: 900px) {
-  .split, .location, .head-split, .fees-layout, .faq-layout, .book-card, .tech, .leaders-grid { grid-template-columns: 1fr; }
+  .split, .location, .head-split, .faq-layout, .book-card, .tech, .leaders-grid { grid-template-columns: 1fr; }
   .head-split { gap: 12px; }
   .cards-3 { grid-template-columns: 1fr 1fr; }
   .quick-book { grid-template-columns: 1fr 1fr; }
@@ -714,7 +692,6 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .stories-tabs button { font-size: .88rem; }
   .story blockquote { font-size: 1.2rem; }
 
-  .emi { padding: 20px; }
   .book-form { grid-template-columns: 1fr; }
   .book-card { border-radius: var(--radius); }
 

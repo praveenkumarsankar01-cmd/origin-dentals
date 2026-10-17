@@ -338,7 +338,6 @@ function home() {
     ['Stained or yellow teeth', 'svc-whitening', '78% 50%', 'whitening', 'Stains from tea, coffee and turmeric respond well to professional whitening. We check your teeth first and tell you honestly how much lighter they are likely to get.', [['Treatment time', 'About 75 minutes'], ['Visits', '1 visit'], ['Fee', 'From $85']]],
     ['Bleeding gums', 'svc-gum-care', '62% 35%', 'gum-care', 'Bleeding when you brush is the earliest sign of gum disease, and the stage at which it can be fully reversed. A deep clean below the gumline usually settles it within a few weeks.', [['Treatment time', '45–60 minutes'], ['Visits', '1–3 visits'], ['Fee', 'From $17']]]
   ];
-  const fees = [['Consultation &amp; check-up', '$6'], ['Scaling &amp; polishing', '$14'], ['Tooth-coloured filling', '$17'], ['Tooth extraction', '$12'], ['Root canal treatment', '$50'], ['Crown, per tooth', '$60'], ['Teeth whitening (in-clinic)', '$85'], ['Complete denture', '$90'], ['Porcelain veneer, per tooth', '$100'], ['Dental implant with crown', '$360'], ['Metal braces', '$400'], ['Clear aligners', '$1,200']];
   const otherHome = ['dentures', 'oral-surgery', 'root-canal', 'crowns-bridges', 'fillings', 'inlays-onlays', 'full-mouth-rehabilitation', 'laser-dentistry', 'sedation-dentistry', 'teeth-cleaning', 'oral-cancer-screening', 'in-house-laboratory', 'emergency', 'teeth-replacement'];
 
   return head({ R, title: `${C.name} | Multispeciality Dental Clinic in Kodambakkam, Chennai`, desc: `${C.name}, Kodambakkam, Chennai — caring for families since ${C.founded}. Implants, root canals, braces and aligners, smile makeovers, dentures, laser and children's dentistry. Book online or call ${C.phone}.`, ld, preload: 'assets/media/tour-poster.webp' }) +
@@ -414,35 +413,6 @@ function home() {
         <a class="btn btn-primary" href="tel:${C.tel}">${ic('phone')} Call ${C.phone}</a>
         <a class="btn btn-outline" href="services/emergency.html">Emergency care</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--soft" id="finder" aria-labelledby="fd-title">
-  <div class="wrap finder" data-tabs>
-    <div class="finder-side">
-      <span class="label">Not sure what you need?</span>
-      <h2 id="fd-title">Start with what you are feeling</h2>
-      <p>Choose the problem closest to yours. If you are still unsure, book a consultation and we will advise you.</p>
-    </div>
-    <div class="finder-tabs" role="tablist" aria-label="Common dental problems" aria-orientation="vertical">
-      ${finder.map(([t, img, pos], i) => `<button type="button" role="tab" id="ft-${i}" aria-controls="fp-${i}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}><span>${t}</span><span class="ft-pic"><img src="assets/img/${img}-240.webp" alt="" width="54" height="54" loading="lazy" decoding="async" style="object-position:${pos}"></span></button>`).join('\n      ')}
-    </div>
-    <div class="finder-panels">
-      ${finder.map(([, , , k, text, facts], i) => {
-        const d = D[S[k].doctor];
-        return `<div class="finder-panel" role="tabpanel" id="fp-${i}" aria-labelledby="ft-${i}" tabindex="0">
-        <span class="label">Likely treatment</span>
-        <h3>${esc(k === 'braces' ? 'Braces & Clear Aligners' : S[k].title)}</h3>
-        <p>${text}</p>
-        <dl class="facts">${facts.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>
-        <div class="finder-doc">${drThumb(R, d, 44)}<span><b>${esc(d.name)}</b>${esc(d.role)}</span></div>
-        <div class="actions">
-          <a class="btn btn-primary" href="index.html?service=${k}#book">Book for this</a>
-          <a class="btn btn-outline" href="services/${k}.html">About ${esc((k === 'braces' ? 'braces & clear aligners' : S[k].title).replace(/^(\w)/, c => c.toLowerCase()))}</a>
-        </div>
-      </div>`;
-      }).join('\n      ')}
     </div>
   </div>
 </section>
@@ -546,28 +516,31 @@ ${moreTreatments(R, otherHome)}
   </div>
 </section>
 
-<section class="section" id="fees" aria-labelledby="fe-title">
-  <div class="wrap fees-layout">
-    <div class="fees-side">
-      <span class="label">Fees</span>
-      <h2 id="fe-title">Clear prices, agreed in writing</h2>
-      <p>Starting prices for common treatments. Your exact fee depends on your case, and you will receive an itemised written estimate before treatment begins.</p>
-      <div class="emi">
-        <h3>Spread the cost</h3>
-        <p>Larger treatments can be paid in monthly instalments.</p>
-        <ul>
-          <li><span>Dental implant with crown</span><b>about $30<small> a month</small></b></li>
-          <li><span>Metal braces</span><b>about $33<small> a month</small></b></li>
-          <li><span>Clear aligners</span><b>about $100<small> a month</small></b></li>
-        </ul>
-        <small class="emi-note">Over 12 months. Reception can give you the exact plan.</small>
-      </div>
+<section class="section" id="finder" aria-labelledby="fd-title">
+  <div class="wrap finder" data-tabs>
+    <div class="finder-side">
+      <span class="label">Not sure what you need?</span>
+      <h2 id="fd-title">Start with what you are feeling</h2>
+      <p>Choose the problem closest to yours. If you are still unsure, book a consultation and we will advise you.</p>
     </div>
-    <div>
-      <ul class="fees fees--2">
-        ${fees.map(([t, p]) => `<li><span>${t}</span><b><small>from</small>${p}</b></li>`).join('\n        ')}
-      </ul>
-      <p class="note">${ic('circle-info')}<span>If your treatment plan changes, we agree any new cost with you before continuing.</span></p>
+    <div class="finder-tabs" role="tablist" aria-label="Common dental problems" aria-orientation="vertical">
+      ${finder.map(([t, img, pos], i) => `<button type="button" role="tab" id="ft-${i}" aria-controls="fp-${i}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}><span>${t}</span><span class="ft-pic"><img src="assets/img/${img}-240.webp" alt="" width="54" height="54" loading="lazy" decoding="async" style="object-position:${pos}"></span></button>`).join('\n      ')}
+    </div>
+    <div class="finder-panels">
+      ${finder.map(([, , , k, text, facts], i) => {
+        const d = D[S[k].doctor];
+        return `<div class="finder-panel" role="tabpanel" id="fp-${i}" aria-labelledby="ft-${i}" tabindex="0">
+        <span class="label">Likely treatment</span>
+        <h3>${esc(k === 'braces' ? 'Braces & Clear Aligners' : S[k].title)}</h3>
+        <p>${text}</p>
+        <dl class="facts">${facts.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>
+        <div class="finder-doc">${drThumb(R, d, 44)}<span><b>${esc(d.name)}</b>${esc(d.role)}</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href="index.html?service=${k}#book">Book for this</a>
+          <a class="btn btn-outline" href="services/${k}.html">About ${esc((k === 'braces' ? 'braces & clear aligners' : S[k].title).replace(/^(\w)/, c => c.toLowerCase()))}</a>
+        </div>
+      </div>`;
+      }).join('\n      ')}
     </div>
   </div>
 </section>
@@ -583,7 +556,7 @@ ${moreTreatments(R, otherHome)}
     <div class="faq">
       <details><summary>Will treatment hurt? ${ic('plus')}</summary><p>Most treatment is done under local anaesthetic, and we apply numbing gel before any injection. You can raise a hand to pause at any time.</p></details>
       <details><summary>I'm nervous about dentists. Can you help? ${ic('plus')}</summary><p>Yes. Tell us when you book and we will give you a longer first appointment, explain each step before we do it, and stop whenever you ask. <a href="services/sedation-dentistry.html">Conscious sedation</a> is also available.</p></details>
-      <details><summary>How will I know what my treatment costs? ${ic('plus')}</summary><p>Starting prices are listed above. After your examination you receive an itemised written estimate, and nothing starts until you have agreed to it.</p></details>
+      <details><summary>How will I know what my treatment costs? ${ic('plus')}</summary><p>Each treatment page shows its starting price. After your examination you receive an itemised written estimate, and nothing starts until you have agreed to it.</p></details>
       <details><summary>Can I pay in instalments? ${ic('plus')}</summary><p>Yes. EMI options are available for larger treatments such as implants, braces and clear aligners. Reception can give you the monthly breakdown.</p></details>
       <details><summary>Can I get advice before I travel to Chennai? ${ic('plus')}</summary><p>Yes. Send your X-rays or photos on WhatsApp and we will outline your options and likely costs, so you can plan your visit. See <a href="international-patients.html">international patients</a>.</p></details>
       <details><summary>Is there parking near the clinic? ${ic('plus')}</summary><p>Street parking is available in front of the clinic, and we are two minutes' walk from Kodambakkam bus stop.</p></details>
