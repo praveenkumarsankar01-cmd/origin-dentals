@@ -170,7 +170,6 @@ h3 { font-size: 1.05rem; line-height: 1.4; letter-spacing: -.005em; }
 /* ---------- top of the home page: the clinic tour video, edge to edge, nothing over it ---------- */
 .hero-video { position: relative; background: #1a232c; }
 .hero-video video { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
-.hero-video .video-btn { left: auto; right: clamp(14px, 3vw, 40px); bottom: clamp(14px, 3vw, 36px); background: rgba(255, 255, 255, .94); }
 .lead { font-size: 1.08rem; color: var(--text-2); max-width: 540px; margin: 18px 0 28px; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
@@ -642,7 +641,6 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .hide-sm { display: none; }
   .actions .btn { flex: 1 1 100%; }
 
-  .hero-video .video-btn { padding: 8px 11px; font-size: .8rem; }
   .qb-wrap { display: none; }
 
   .intro { padding: 44px 0 48px; }

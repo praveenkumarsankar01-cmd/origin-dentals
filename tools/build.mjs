@@ -350,7 +350,6 @@ function home() {
 <section class="hero-video" id="tour" aria-labelledby="hero-title">
   <h1 id="hero-title" class="sr-only">${C.name} — advanced dentistry, simplified. A multispeciality dental clinic in Kodambakkam, Chennai</h1>
   <video data-video data-after-load data-src="assets/media/tour.mp4" data-src-hd="assets/media/tour-hd.mp4" data-src-phone="assets/media/tour-phone.mp4" muted loop playsinline preload="none" poster="assets/media/tour-poster.webp" aria-label="A walk through ${C.name}: the entrance, reception, treatment rooms and the dental team"></video>
-  <button class="video-btn" type="button">${ic('play')}${ic('pause').replace('aria-hidden="true"', 'aria-hidden="true" hidden')}<span data-label>Play the tour</span></button>
 </section>
 
 <section class="leaders" id="leaders" aria-labelledby="ld-title">
