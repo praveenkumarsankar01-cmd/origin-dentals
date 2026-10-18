@@ -393,13 +393,13 @@ function home() {
   </div>
 </section>
 
-<section class="section section--soft" id="treatments" aria-labelledby="tr-title">
+<section class="section section--soft" id="treatments" aria-labelledby="tr-title" data-carousel-box>
   <div class="wrap">
     <div class="head-split">
       <div><span class="label">Treatments</span><h2 id="tr-title">General, specialist and cosmetic dentistry</h2></div>
-      <div><p>All ${all.length} treatments are carried out in one clinic, with one patient record shared between our dentists.</p><a class="text-link" href="services/index.html">See all treatments ${ic('arrow-right')}</a></div>
+      <div><p>All ${all.length} treatments are carried out in one clinic, with one patient record shared between our dentists.</p><div class="svc-nav"><a class="text-link" href="services/index.html">See all treatments ${ic('arrow-right')}</a><span class="car-nav"><button class="car-btn car-btn--light" type="button" data-car-prev aria-label="Previous treatments">${ic('chevron-left')}</button><button class="car-btn car-btn--light" type="button" data-car-next aria-label="Next treatments">${ic('chevron-right')}</button></span></div></div>
     </div>
-    <div class="svc-cards">
+    <div class="car-track svc-cards" data-carousel tabindex="0" role="region" aria-label="Treatments">
       ${card('implants')}
       ${card('root-canal')}
       ${card('braces', { title: 'Braces & Clear Aligners', text: 'Braces and nearly invisible clear aligners, for children and adults.', photo: S.aligners })}

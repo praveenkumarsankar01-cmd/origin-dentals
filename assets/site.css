@@ -212,7 +212,13 @@ h3 { font-size: 1.05rem; line-height: 1.4; letter-spacing: -.005em; }
 .leader-quals { display: block; margin-top: 6px; font-size: .64rem; font-weight: 600; letter-spacing: .2em; line-height: 1.8; text-transform: uppercase; }
 
 /* ---------- treatments: photo grid of mixed sizes ---------- */
-.svc-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+/* one row of four; the rest are reached by swiping or the arrows (carousel) */
+.svc-cards { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * 22px) / 4); gap: 22px; padding: 10px 4px 34px; margin: -10px -4px -34px; }
+.svc-cards > .svc-card { scroll-snap-align: start; }
+.svc-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 10px; }
+.svc-nav .text-link { margin-top: 0; }
+.car-btn.car-btn--light { background: #fff; color: var(--text); border: 1px solid var(--line-2); }
+.car-btn.car-btn--light:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
 .svc-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; color: var(--text-2); box-shadow: 0 18px 40px -30px rgba(23, 34, 46, .45); transition: transform .3s var(--ease), box-shadow .3s; }
 .svc-card:hover { color: var(--text-2); transform: translateY(-6px); box-shadow: 0 30px 50px -30px rgba(23, 34, 46, .5); }
 .svc-card-media { position: relative; }
@@ -610,7 +616,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .figures { grid-template-columns: 1fr 1fr; }
   .figures div:nth-child(3) { border-left: 0; padding-left: 0; }
   .figures div:nth-child(n+3) { margin-top: 26px; border-top: 1px solid var(--line); }
-  .svc-cards { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .svc-cards { grid-auto-columns: calc((100% - 18px) / 2); gap: 18px; }
   .finder { grid-template-columns: minmax(0, 1fr); grid-template-areas: "side" "tabs" "panel"; grid-template-rows: none; gap: 24px; }
   .finder-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border: 0; }
   .finder-tabs button { gap: 10px; padding: 10px 10px 10px 14px; border: 1px solid var(--line-2); border-radius: var(--radius-sm); background: #fff; font-size: .92rem; }
@@ -662,7 +668,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .leader h3 { font-size: .8rem; line-height: 1.25; padding: 0 4px; }
   .leader-quals { margin-top: 3px; font-size: .46rem; letter-spacing: .08em; line-height: 1.6; }
 
-  .svc-cards { gap: 12px; }
+  .svc-cards { grid-auto-columns: calc((100% - 12px) / 2); gap: 12px; }
   .svc-card-badge { left: 12px; bottom: -22px; width: 44px; height: 44px; border-width: 3px; }
   .svc-card-badge svg { width: 23px; height: 23px; }
   .svc-card-body { padding: 30px 12px 12px; }
