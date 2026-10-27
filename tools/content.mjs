@@ -8,12 +8,16 @@
 export const clinic = {
   name: 'Origin Dental',
   tagline: 'Advanced Dentistry · Simplified',
-  // placeholders: no real phone, email or street address on the concept site
-  phone: '+91 00000 00000',
-  tel: '+910000000000',
-  wa: '910000000000',
-  email: 'hello@example.com',
-  address: 'Chennai, Tamil Nadu',
+  // fictional but realistic: the number is in Ofcom's range reserved for drama (it never reaches a real
+  // line) and the email domain is unregistered, so no visitor's call or message lands with a real person
+  phone: '+44 7700 900461',
+  tel: '+447700900461',
+  wa: '447700900461',
+  email: 'hello@origindentals.in',
+  area: 'Kodambakkam, Chennai',
+  street: 'No. 18, Arcot Road, Kodambakkam',
+  postcode: '600024',
+  address: 'No. 18, Arcot Road, Kodambakkam, Chennai 600024',
   mapQuery: 'Kodambakkam, Chennai', // the map and directions show the neighbourhood, not a street address
   founded: 2000,
   hours: [

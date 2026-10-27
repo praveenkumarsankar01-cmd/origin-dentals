@@ -95,7 +95,7 @@ function chrome(R, isHome, active) {
     <ul class="topbar-list">
       <li><a href="tel:${C.tel}">${ic('phone')}${C.phone}</a></li>
       <li class="hide-md"><a href="mailto:${C.email}">${ic('envelope')}${C.email}</a></li>
-      <li class="hide-lg"><span>${ic('location-dot')}${C.address}</span></li>
+      <li class="hide-lg"><span>${ic('location-dot')}${C.area}</span></li>
     </ul>
     <div class="topbar-right">
       <span class="open-badge" data-open-badge>Mon–Sat 8 AM – 9 PM</span>
@@ -315,7 +315,7 @@ function home() {
   const ld = `\n<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Dentist', name: C.name, slogan: C.tagline, logo: 'assets/img/logo.png', image: 'assets/img/clinic-room.webp',
     telephone: C.phone, email: C.email, priceRange: '$$', foundingDate: String(C.founded),
-    address: { '@type': 'PostalAddress', addressLocality: 'Chennai', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
+    address: { '@type': 'PostalAddress', streetAddress: C.street, addressLocality: 'Chennai', addressRegion: 'Tamil Nadu', postalCode: C.postcode, addressCountry: 'IN' },
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '21:00' },
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '09:00', closes: '13:00' }]
